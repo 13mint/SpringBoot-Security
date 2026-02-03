@@ -39,17 +39,7 @@ public class WebSecurityConfig {
         return http.build();
     }
 
-    // аутентификация inMemory
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails user = User.builder()
-                .username("user")
-                .password(passwordEncoder().encode("user"))
-                .roles("USER")
-                .build();
 
-        return new InMemoryUserDetailsManager(user);
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

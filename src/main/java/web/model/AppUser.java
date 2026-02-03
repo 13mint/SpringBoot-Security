@@ -3,11 +3,12 @@ package web.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
+import java.util.Collection;
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -37,21 +38,25 @@ public class User {
     )
     private String email;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    private int password;
+
+    @ManyToMany
     @JoinTable(
             name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles;
 
-    public User() {    }
+    public AppUser() {    }
 
-    public User(String name, String surname, int age, String email) {
+    public AppUser(String name, String surname, int age, String email, int password) {
         this.name = name;
         this.surname = surname;
         this.age = age;
         this.email = email;
+        this.password = password;
     }
 
     public void addRole(Role role) {
@@ -95,4 +100,10 @@ public class User {
     public String getEmail() {return email;}
 
     public void setEmail(String email) {this.email = email;}
+
+    public String getPassword() {return password;}
+
+    public Collection<Object> getRoles() {
+
+    }
 }

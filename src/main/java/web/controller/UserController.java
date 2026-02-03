@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import web.model.User;
+import web.model.AppUser;
 import web.service.UserService;
 
 import jakarta.validation.Valid;
@@ -27,12 +27,12 @@ public class UserController {
 
     @GetMapping("/addUser")
     public String addUser( Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new AppUser());
         return "addUser";
     }
 
     @PostMapping()
-    public String saveUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
+    public String saveUser(@Valid @ModelAttribute("user") AppUser user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "addUser";
         }
@@ -53,7 +53,7 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    public String updateUser(@Valid @ModelAttribute("user") User user,  BindingResult bindingResult) {
+    public String updateUser(@Valid @ModelAttribute("user") AppUser user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "editUser";
         }

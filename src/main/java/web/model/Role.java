@@ -16,7 +16,7 @@ public class Role {
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
+    private Set<AppUser> users;
 
     public Role() {}
 
@@ -36,11 +36,11 @@ public class Role {
         this.name = name;
     }
 
-    public Set<User> getUsers() {
+    public Set<AppUser> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<User> users) {
+    public void setUsers(Set<AppUser> users) {
         this.users = users;
     }
 

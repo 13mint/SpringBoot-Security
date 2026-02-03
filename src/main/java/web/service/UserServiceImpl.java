@@ -3,7 +3,7 @@ package web.service;
 import org.springframework.transaction.annotation.Transactional;
 import web.repository.UserRepository;
 import org.springframework.stereotype.Service;
-import web.model.User;
+import web.model.AppUser;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void save(User user) {
+    public void save(AppUser user) {
         repo.save(user);
     }
 
@@ -28,12 +28,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findById(Long id) {
+    public Optional<AppUser> findById(Long id) {
         return repo.findById(id);
     }
 
     @Override
-    public List<User> findAll() {
+    public List<AppUser> findAll() {
         return repo.findAll();
     }
 
