@@ -1,14 +1,15 @@
-package web.service;
-
+package web.security;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import web.model.AppUser;
 import web.model.Role;
 import web.repository.UserRepository;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
+
     private final UserRepository userRepository;
 
     public CustomUserDetailsService(UserRepository userRepository) {
@@ -19,7 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
 
-        web.model.AppUser user = userRepository.findByUsername(username)
+        AppUser user = userRepository.findByUsername(username)
                 .orElseThrow(() ->
                         new UsernameNotFoundException("User not found: " + username));
 
@@ -28,8 +29,8 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .password(user.getPassword())
                 .authorities(
                         user.getRoles().stream()
-                                .map(Role::getName)
-                                .toArray(String[]::new)
+                                .map(Role::getName)   // ROLE_USER
+                                .toArray(Object[]::new)
                 )
                 .build();
     }

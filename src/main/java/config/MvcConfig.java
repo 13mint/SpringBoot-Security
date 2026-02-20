@@ -1,4 +1,4 @@
-package spring.boot_security.configs;
+package config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
