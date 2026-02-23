@@ -13,8 +13,7 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
-    @NotBlank
+    @Column(unique = true, nullable = false)
     @Pattern(
             regexp = "^[A-Za-zА-Яа-яЁё]+$",
             message = "Name must contain oly letters"
