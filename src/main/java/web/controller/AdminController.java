@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import web.model.AppUser;
 import web.service.UserService;
 
-
 @Controller
 @RequestMapping("/admin")
 public class AdminController {

@@ -1,4 +1,5 @@
 package web.security;
+
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import web.model.AppUser;
 import web.model.Role;
 import web.repository.UserRepository;
+
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -35,4 +37,5 @@ public class CustomUserDetailsService implements UserDetailsService {
                 )
                 .build();
     }
+
 }
