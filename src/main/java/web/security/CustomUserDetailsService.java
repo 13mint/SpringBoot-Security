@@ -30,7 +30,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .password(user.getPassword())
                 .authorities(
                         user.getRoles().stream()
-                                .map(role -> role.getName().replace("ROLE_", ""))
+                                .map(Role::getName)
                                 .toArray(String[]::new)
                 )
                 .build();
