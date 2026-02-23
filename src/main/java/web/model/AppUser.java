@@ -49,14 +49,21 @@ public class AppUser {
                     name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles;
 
-    public AppUser() {    }
+    public AppUser(Set<Role> roles) {
+        this.roles = roles;
+    }
 
-    public AppUser(String name, String surname, int age, String email, int password) {
+    public AppUser(String name, String surname, int age, String email, int password, Set<Role> roles) {
         this.name = name;
         this.surname = surname;
         this.age = age;
         this.email = email;
         this.password = password;
+        this.roles = roles;
+    }
+
+    public AppUser() {
+
     }
 
     public void addRole(Role role) {
