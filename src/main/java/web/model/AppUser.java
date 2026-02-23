@@ -33,10 +33,7 @@ public class AppUser {
     private int age;
 
     @NotBlank
-    @Pattern(
-            regexp = "^[A-Za-z0-9+_.-@]+(\\.com)$",
-            message = "Email must end with .com"
-    )
+    @Email
     private String email;
 
     private String password;
