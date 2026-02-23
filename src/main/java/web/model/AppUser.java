@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -19,7 +20,6 @@ public class AppUser {
             message = "Name must contain oly letters"
     )
     private String username;
-
     @NotBlank
     @Pattern(
             regexp = "^[A-Za-zА-Яа-яЁё]+$",
