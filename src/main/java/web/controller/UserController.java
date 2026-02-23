@@ -1,64 +1,18 @@
 package web.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import web.model.AppUser;
-import web.service.UserService;
-
-import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
-    private final UserService userServiceImpl;
-
-    public UserController(UserService userServiceImpl) {
-        this.userServiceImpl = userServiceImpl;
-    }
-
-
     @GetMapping
-    public String listUsers(Model model) {
-        model.addAttribute("users", userServiceImpl.findAll());
-        return "users";
+    public String userPage(Model model,
+                           @AuthenticationPrincipal UserDetails userDetails){
+        model.addAttribute("user",userDetails);
+        return "user";
     }
-
-    @GetMapping("/addUser")
-    public String addUser( Model model) {
-        model.addAttribute("user", new AppUser());
-        return "addUser";
-    }
-
-    @PostMapping()
-    public String saveUser(@Valid @ModelAttribute("user") AppUser user, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "addUser";
-        }
-        userServiceImpl.save(user);
-        return "redirect:/users";
-    }
-
-    @PostMapping("/deleteUser/{id}")
-    public String deleteUser(@PathVariable Long id) {
-        userServiceImpl.delete(id);
-        return "redirect:/users";
-    }
-
-    @GetMapping("/editUser/{id}")
-    public String editUser(@PathVariable Long id,Model model) {
-        model.addAttribute("user", userServiceImpl.findById(id));
-        return "editUser";
-    }
-
-    @PostMapping("/update")
-    public String updateUser(@Valid @ModelAttribute("user") AppUser user, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "editUser";
-        }
-        userServiceImpl.save(user);
-        return "redirect:/users";
-    }
-
 }
