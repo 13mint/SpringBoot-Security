@@ -13,19 +13,20 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     @NotBlank
     @Pattern(
             regexp = "^[A-Za-zА-Яа-яЁё]+$",
             message = "Name must contain oly letters"
     )
-    private String name;
+    private String username;
 
     @NotBlank
     @Pattern(
             regexp = "^[A-Za-zА-Яа-яЁё]+$",
             message = "Name must contain oly letters"
     )
-    private String surname;
+    private String usersurname;
 
     @Min(value = 1, message = "Age must be greater than 0")
     @Max(value = 120, message = "Age must be less than 120")
@@ -38,7 +39,7 @@ public class AppUser {
     )
     private String email;
 
-    private int password;
+    private String password;
 
     @ManyToMany
     @JoinTable(
@@ -53,9 +54,9 @@ public class AppUser {
         this.roles = roles;
     }
 
-    public AppUser(String name, String surname, int age, String email, int password, Set<Role> roles) {
-        this.name = name;
-        this.surname = surname;
+    public AppUser(String username, String usersurname, int age, String email, String password, Set<Role> roles) {
+        this.username = username;
+        this.usersurname = usersurname;
         this.age = age;
         this.email = email;
         this.password = password;
@@ -85,19 +86,19 @@ public class AppUser {
     }
 
     public String getName() {
-        return name;
+        return username;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.username = username;
     }
 
     public String getSurname() {
-        return surname;
+        return usersurname;
     }
 
     public void setSurname(String surname) {
-        this.surname = surname;
+        this.usersurname = usersurname;
     }
 
     public int getAge() {return age;}
@@ -110,7 +111,7 @@ public class AppUser {
 
     public String getPassword() {return password;}
 
-    public Collection<Object> getRoles() {
-
+    public Set<Role> getRoles() {
+        return roles;
     }
 }
