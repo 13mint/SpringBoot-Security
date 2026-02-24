@@ -80,19 +80,19 @@ public class AppUser {
         this.id = id;
     }
 
-    public String getName() {
+    public String getUsername() {
         return username;
     }
 
-    public void setName(String name) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    public String getSurname() {
+    public String getUsersurname() {
         return usersurname;
     }
 
-    public void setSurname(String surname) {
+    public void setUsersurname(String usersurname) {
         this.usersurname = usersurname;
     }
 
@@ -105,6 +105,8 @@ public class AppUser {
     public void setEmail(String email) {this.email = email;}
 
     public String getPassword() {return password;}
+
+    public void setPassword(String password) { this.password = password;}
 
     public Set<Role> getRoles() {
         return roles;

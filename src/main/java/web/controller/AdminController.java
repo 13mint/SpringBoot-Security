@@ -1,5 +1,6 @@
 package web.controller;
 
+import com.fasterxml.jackson.core.Base64Variant;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
