@@ -8,36 +8,36 @@
 
 <h2>Edit User</h2>
 
-<form th:action="@{/users/update}" th:object="${user}" method="post">
+<form th:action="@{/users/edit}" th:object="${user}" method="post">
 
     <input type="hidden" th:field="*{id}" />
 
     <div>
         <label>Name:</label>
-        <input type="text" th:field="*{name}" />
-        <div th:if="${#fields.hasErrors('name')}"
-             th:errors="*{name}" style="color:red"></div>
+        <input type="text" th:field="*{username}" />
+        <div th:if="${#fields.hasErrors('username')}"
+             th:errors="*{username}" style="color:red"></div>
     </div>
 
     <div>
         <label>Surname:</label>
-        <input type="text" th:field="*{surname}" />
-        <div th:if="${#fields.hasErrors('surname')}"
-             th:errors="*{surname}" style="color:red"></div>
+        <input type="text" th:field="*{usersurname}" />
+        <div th:if="${#fields.hasErrors('usersurname')}"
+             th:errors="*{user.usersurname}" style="color:red"></div>
     </div>
 
     <div>
         <label>Age:</label>
-        <input type="text" th:field="*{age}" />
+        <input type="text" th:field="*{user.age}" />
         <div th:if="${#fields.hasErrors('age')}"
-             th:errors="*{age}" style="color:red"></div>
+             th:errors="*{user.age}" style="color:red"></div>
     </div>
 
     <div>
         <label>Email:</label>
-        <input type="text" th:field="*{email}" />
+        <input type="text" th:field="*{user.email}" />
         <div th:if="${#fields.hasErrors('email')}"
-             th:errors="*{email}" style="color:red"></div>
+             th:errors="*{user.email}" style="color:red"></div>
     </div>
 
     <br/>

@@ -1,7 +1,6 @@
 package web.config;
 
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import web.model.AppUser;
@@ -27,44 +26,46 @@ public class MyCommandLineRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("RUNNER STARTED");
 
-        Role userRole = roleRepository.findByName("ROLE_USER")
-                .orElseGet(() -> roleRepository.save(new Role("ROLE_USER")));
-        Role adminRole = roleRepository.findByName("ROLE_ADMIN")
-                .orElseGet(() -> roleRepository.save(new Role("ROLE_ADMIN")));
 
-        Set<Role> roles = new HashSet<>();
-
-        if (userRepository.findByUsername("test1").isPresent()) {
-            AppUser user = new AppUser();
-            user.setUsername("Test");
-            user.setUsersurname("Surname");
-            user.setAge(20);
-            user.setEmail("test1@mail.com");
-            user.setPassword(passwordEncoder.encode("test1"));
-
-            roles.add(userRole);
-            user.setRoles(Set.of((Role) roles));
-
-            userRepository.save(user);
-        }
-
-        if (userRepository.findByUsername("test2").isEmpty()) {
-            AppUser admin = new AppUser();
-            admin.setUsername("Admin");
-            admin.setUsersurname("Admin");
-            admin.setAge(21);
-            admin.setEmail("admin@mail.com");
-            admin.setPassword(passwordEncoder.encode("admin"));
-
-            roles.add(adminRole);
-            admin.setRoles(roles);
-
-            userRepository.save(admin);
-        }
-
-        System.out.println("USER SAVED");
     }
-
+//        System.out.println("RUNNER STARTED");
+//
+//        Role userRole = roleRepository.findByName("ROLE_USER")
+//                .orElseGet(() -> roleRepository.save(new Role("ROLE_USER")));
+//        Role adminRole = roleRepository.findByName("ROLE_ADMIN")
+//                .orElseGet(() -> roleRepository.save(new Role("ROLE_ADMIN")));
+//
+//        Set<Role> roles = new HashSet<>();
+//
+//        if (userRepository.findByUsername("test1").isPresent()) {
+//            AppUser user = new AppUser();
+//            user.setUsername("Test");
+//            user.setUsersurname("Surname");
+//            user.setAge(20);
+//            user.setEmail("test1@mail.com");
+//            user.setPassword(passwordEncoder.encode("test1"));
+//
+//            roles.add(userRole);
+//            user.setRoles(Set.of((Role) roles));
+//
+//            userRepository.save(user);
+//        }
+//
+//        if (userRepository.findByUsername("test2").isEmpty()) {
+//            AppUser admin = new AppUser();
+//            admin.setUsername("Admin");
+//            admin.setUsersurname("Admin");
+//            admin.setAge(21);
+//            admin.setEmail("admin@mail.com");
+//            admin.setPassword(passwordEncoder.encode("admin"));
+//
+//            roles.add(adminRole);
+//            admin.setRoles(roles);
+//
+//            userRepository.save(admin);
+//        }
+//
+//        System.out.println("USER SAVED");
+//    }
 }

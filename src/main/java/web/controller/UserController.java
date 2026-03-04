@@ -12,23 +12,17 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    public void UserPageController(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
     @GetMapping("/user")
     public String userPage(Model model, Principal principal) {
-
         Optional<AppUser> user = userRepository.findByUsername(principal.getName());
-
         model.addAttribute("user", user);
 
-        return "user";
+        return "users";
     }
 }

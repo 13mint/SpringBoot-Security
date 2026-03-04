@@ -14,16 +14,16 @@
 
     <div>
         <label>Name:</label>
-        <input type="text" th:field="*{name}" />
+        <input type="text" th:field="*{username}" />
         <div th:if="${#fields.hasErrors('name')}"
-             th:errors="*{name}" style="color:red"></div>
+             th:errors="*{username}" style="color:red"></div>
     </div>
 
     <div>
         <label>Surname:</label>
-        <input type="text" th:field="*{surname}" />
+        <input type="text" th:field="*{usersurname}" />
         <div th:if="${#fields.hasErrors('surname')}"
-             th:errors="*{surname}" style="color:red"></div>
+             th:errors="*{usersurname}" style="color:red"></div>
     </div>
 
     <div>
