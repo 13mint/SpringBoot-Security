@@ -34,13 +34,13 @@ public class MyCommandLineRunner implements CommandLineRunner {
 
         Set<Role> roles = new HashSet<>();
 
-        if (userRepository.findByUsername("test1").isPresent()) {
+        if (userRepository.findByUsername("test").isPresent()) {
             AppUser user = new AppUser();
-            user.setUsername("Test");
-            user.setUsersurname("Surname");
+            user.setUsername("test");
+            user.setUsersurname("test");
             user.setAge(20);
             user.setEmail("test1@mail.com");
-            user.setPassword(passwordEncoder.encode("test1"));
+            user.setPassword(passwordEncoder.encode("test"));
 
             roles.add(userRole);
             user.setRoles(Set.of((Role) roles));
@@ -48,10 +48,10 @@ public class MyCommandLineRunner implements CommandLineRunner {
             userRepository.save(user);
         }
 
-        if (userRepository.findByUsername("test2").isEmpty()) {
+        if (userRepository.findByUsername("admin").isEmpty()) {
             AppUser admin = new AppUser();
-            admin.setUsername("Admin");
-            admin.setUsersurname("Admin");
+            admin.setUsername("admin");
+            admin.setUsersurname("admin");
             admin.setAge(21);
             admin.setEmail("admin@mail.com");
             admin.setPassword(passwordEncoder.encode("admin"));
