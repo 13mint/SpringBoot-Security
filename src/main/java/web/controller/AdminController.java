@@ -29,12 +29,8 @@ public class AdminController {
         return "addUser";
     }
 
-    @PostMapping()
+    @PostMapping("/newUser")
     public String createUser(@Valid @ModelAttribute("user") AppUser user, BindingResult bindingResult, Model model){
-        if(bindingResult.hasErrors()){
-            return "addUser";
-        }
-
         if (userService.findByUsername(user.getUsername())) {
             bindingResult.rejectValue("username", "", "Username already exists");
         }
@@ -43,12 +39,10 @@ public class AdminController {
             bindingResult.rejectValue("email", "", "Email already exists");
         }
 
-        userService.save(user);
-        return "redirect:/admin";
-    }
+        if(bindingResult.hasErrors()){
+            return "addUser";
+        }
 
-    @PostMapping("/newUser")
-    public String saveUser(@ModelAttribute AppUser user) {
         userService.save(user);
         return "redirect:/admin";
     }
@@ -66,7 +60,14 @@ public class AdminController {
     }
 
     @PostMapping("/edit")
-    public String updateUser(@ModelAttribute AppUser user) {
+    public String updateUser(@ModelAttribute AppUser user, BindingResult  bindingResult, Model model) {
+        if (userService.findByUsername(user.getUsername())) {
+            bindingResult.rejectValue("username", "", "Username already exists");
+        }
+
+        if (userService.findByEmail(user.getEmail())) {
+            bindingResult.rejectValue("email", "", "Email already exists");
+        }
         userService.save(user);
         return "redirect:/admin";
     }
