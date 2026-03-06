@@ -60,7 +60,7 @@ public class AdminController {
     }
 
     @PostMapping("/edit")
-    public String updateUser(@ModelAttribute AppUser user, BindingResult  bindingResult, Model model) {
+    public String updateUser(@Valid @ModelAttribute("user") AppUser user, BindingResult  bindingResult, Model model) {
         AppUser existingUser = userService.findById(user.getId()).orElseThrow();
 
         if (!existingUser.getUsername().equals(user.getUsername())
