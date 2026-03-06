@@ -30,8 +30,15 @@ public class AdminController {
     }
 
     @PostMapping()
-    public String createUser(@Valid @ModelAttribute("user") AppUser user, BindingResult bindingResult){
+    public String createUser(@Valid @ModelAttribute("user") AppUser user, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()){
+            return "addUser";
+        }
+
+        try{
+            userService.save(user);
+        } catch(RuntimeException e){
+            model.addAttribute("errorMessage", e.getMessage());
             return "addUser";
         }
 

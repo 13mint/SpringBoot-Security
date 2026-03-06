@@ -8,6 +8,10 @@
 
 <h2>Add User</h2>
 
+<div th:if="${errorMessage}" style="color:red">
+    <p th:text="${errorMessage}"></p>
+</div>
+
 <form th:action="@{/admin/newUser}" th:object="${user}" method="post">
 
     <input type="hidden" th:field="*{id}" />

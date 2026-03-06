@@ -36,6 +36,14 @@ public class UserServiceImpl implements UserService {
         if (user.getRoles() == null || user.getRoles().isEmpty()) {
             user.setRoles(Set.of(roleUser));
         }
+
+        if(repo.findByUsername(user.getUsername()).isPresent()){
+            throw new RuntimeException("Username already exists");
+        }
+        if(repo.findByEmail(user.getEmail()).isPresent()){
+            throw new RuntimeException("Email already exists");
+        }
+
         repo.save(user);
     }
 
