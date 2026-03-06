@@ -20,16 +20,18 @@ public class AppUser implements UserDetails {
     @Column(unique = true, nullable = false)
     @Pattern(
             regexp = "^[A-Za-zА-Яа-яЁё]+$",
-            message = "Name must contain oly letters"
+            message = "Name must contain only letters"
     )
     private String username;
+
     @NotBlank
     @Pattern(
             regexp = "^[A-Za-zА-Яа-яЁё]+$",
-            message = "Name must contain oly letters"
+            message = "Name must contain only letters"
     )
     private String usersurname;
 
+    @NotNull(message = "Age cannot be empty")
     @Min(value = 1, message = "Age must be greater than 0")
     @Max(value = 120, message = "Age must be less than 120")
     private int age;
