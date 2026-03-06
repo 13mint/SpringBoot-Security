@@ -61,7 +61,11 @@ public class AdminController {
 
     @PostMapping("/edit")
     public String updateUser(@ModelAttribute AppUser user, BindingResult  bindingResult, Model model) {
-        if (userService.findByUsername(user.getUsername())) {
+        AppUser existingUser = userService.findById(user.getId()).orElseThrow();
+
+        if (!existingUser.getUsername().equals(user.getUsername())
+                && userService.findByUsername(user.getUsername())) {
+
             bindingResult.rejectValue("username", "", "Username already exists");
         }
 
