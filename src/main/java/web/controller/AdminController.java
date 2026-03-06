@@ -17,7 +17,7 @@ public class AdminController {
 
     @GetMapping
     public String adminPage(Model model) {
-        model.addAttribute("user", userService.findAll());
+        model.addAttribute("users", userService.findAll());
         return "admin";
     }
 
@@ -27,7 +27,7 @@ public class AdminController {
         return "addUser";
     }
 
-    @PostMapping("/edit")
+    @PostMapping("/newUser")
     public String saveUser(@ModelAttribute AppUser user) {
         userService.save(user);
         return "redirect:/admin";
@@ -43,5 +43,11 @@ public class AdminController {
     public String editUser(Model model, @PathVariable Long id) {
         model.addAttribute("user", userService.findById(id));
         return "editUser";
+    }
+
+    @PostMapping("/edit")
+    public String updateUser(@ModelAttribute AppUser user) {
+        userService.save(user);
+        return "redirect:/admin";
     }
 }
