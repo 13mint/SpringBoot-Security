@@ -31,9 +31,7 @@ public class AdminController {
     @GetMapping("/newUser")
     public String createUserForm(Model model) {
         model.addAttribute("user", new AppUser());
-
-        model.addAttribute("adminRole", roleService.findByName("ROLE_ADMIN"));
-        model.addAttribute("userRole", roleService.findByName("ROLE_USER"));
+        model.addAttribute("roles", roleService.findAll());
         return "addUser";
     }
 

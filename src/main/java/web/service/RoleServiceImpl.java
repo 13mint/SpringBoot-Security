@@ -1,7 +1,10 @@
 package web.service;
 
 import org.springframework.stereotype.Service;
+import web.model.Role;
 import web.repository.RoleRepository;
+
+import java.util.List;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -16,5 +19,8 @@ public class RoleServiceImpl implements RoleService {
         return roleRepository.findByName(name).isPresent();
     }
 
-
+    @Override
+    public List<Role> findAll() {
+        return roleRepository.findAll();
+    }
 }
