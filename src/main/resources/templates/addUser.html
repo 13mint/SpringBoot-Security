@@ -18,15 +18,15 @@
     <input type="hidden" th:field="*{id}" />
 
     <div class="form">
-        <label>Role</label>
-        <label>
-            <select th:field="*{roles}">
-                <option th:each="role : ${roles}"
-                        th:value="${role.id}"
-                        th:text="${role.name}">
-                </option>
-            </select>
-        </label>
+        <label>Roles:</label>
+
+        <div th:each="role : ${roles}" class="role-item">
+            <input type="checkbox"
+                   th:field="*{roles}"
+                   th:value="${role.id}" />
+
+            <span th:text="${role.name}"></span>
+        </div>
     </div>
 
     <div class="form">

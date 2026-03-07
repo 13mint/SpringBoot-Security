@@ -6,3 +6,10 @@ label{
 .form{
     width:800px;
 }
+
+.role-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-right: 15px;
+}
