@@ -20,7 +20,6 @@
 
         <div th:each="role : ${roles}" class="role-item">
             <input type="checkbox"
-                   th:field="*{roles}"
                    th:value="${role.id}" />
 
             <span th:text="${role.name}"></span>
@@ -38,9 +37,17 @@
     <br>
     <div class="form">
         <label>Surname:</label>
-        <input type="text" th:field="*{usersurname}" required size="25"/>
-        <div th:if="${#fields.hasErrors('usersurname')}"
-             th:errors="*{usersurname}" style="color:red"></div>
+        <input type="text" th:field="*{firstName}" required size="25"/>
+        <div th:if="${#fields.hasErrors('firstName')}"
+             th:errors="*{firstName}" style="color:red"></div>
+    </div>
+
+    <br>
+    <div class="form">
+        <label>Surname:</label>
+        <input type="text" th:field="*{lastName}" required size="25"/>
+        <div th:if="${#fields.hasErrors('lastName')}"
+             th:errors="*{lastName}" style="color:red"></div>
     </div>
 
     <br>
