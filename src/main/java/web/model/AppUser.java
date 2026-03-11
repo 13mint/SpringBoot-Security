@@ -24,6 +24,7 @@ public class AppUser implements UserDetails {
     )
     private String username;
 
+    @Column(name = "first_name")
     @NotBlank
     @Pattern(
             regexp = "^[A-Za-zА-Яа-яЁё]+$",
@@ -31,6 +32,7 @@ public class AppUser implements UserDetails {
     )
     private String firstName;
 
+    @Column(name = "last_name")
     @NotBlank
     @Pattern(
             regexp = "^[A-Za-zА-Яа-яЁё]+$",
@@ -114,7 +116,7 @@ public class AppUser implements UserDetails {
         return lastName;
     }
     public void setLastName(String lastName) {
-        this.username = lastName;
+        this.lastName = lastName;
     }
 
     public int getAge() {return age;}

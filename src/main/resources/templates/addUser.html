@@ -85,8 +85,8 @@
     <button type="button">Back</button>
 </a>
 
-<br>
 <form th:action="@{/logout}" method="post">
+    <br>
     <input type="hidden"
            th:name="${_csrf.parameterName}"
            th:value="${_csrf.token}" />
