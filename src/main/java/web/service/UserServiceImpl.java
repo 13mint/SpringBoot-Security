@@ -42,6 +42,10 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("Email already exists");
         }
 
+        if (user.getPassword() == null || user.getPassword().isBlank()) {
+            throw new RuntimeException("Password is required");
+        }
+
         repo.save(user);
     }
 

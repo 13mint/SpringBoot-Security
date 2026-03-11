@@ -71,13 +71,16 @@
              th:errors="*{email}" style="color:red"></div>
     </div>
 
+
     <br>
+    <input type="hidden" th:field="*{password}">
+
     <div class="form">
         <label>Password:</label>
         <input type="password"
-               th:field="*{password}"
+               name="password"
                placeholder="Leave empty to keep current password"
-               required size="25"/>
+               size="25"/>
         <div th:if="${#fields.hasErrors('password')}"
              th:errors="*{password}" style="color:red"></div>
     </div>

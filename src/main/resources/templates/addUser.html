@@ -42,15 +42,17 @@
              th:errors="*{username}" style="color:red"></div>
     </div>
 
+    <br>
     <div class="form">
-        <label>Surname:</label>
+        <label>First name:</label>
         <input type="text" th:field="*{firstName}" required size="25"/>
         <div th:if="${#fields.hasErrors('firstName')}"
              th:errors="*{firstName}" style="color:red"></div>
     </div>
 
+    <br>
     <div class="form">
-        <label>Surname:</label>
+        <label>Last name:</label>
         <input type="text" th:field="*{lastName}" required size="25"/>
         <div th:if="${#fields.hasErrors('lastName')}"
              th:errors="*{lastName}" style="color:red"></div>
