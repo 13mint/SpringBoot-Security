@@ -27,6 +27,11 @@
 
             <span th:text="${role.name}"></span>
         </div>
+
+        <div th:if="${#fields.hasErrors('roles')}"
+             th:errors="*{roles}"
+             style="color:red">
+        </div>
     </div>
 
     <br>

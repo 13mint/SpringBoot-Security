@@ -11,6 +11,8 @@ public interface UserService {
 
      void delete(Long id);
 
+     void update(AppUser user);
+
      Optional<AppUser> findById(Long id);
 
      List<AppUser> findAll();

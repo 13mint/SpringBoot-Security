@@ -21,12 +21,15 @@
         <div th:each="role : ${roles}" class="role-item">
             <label>
                 <input type="checkbox"
-                       th:value="${role.id}" />
+                       th:field="*{roles}" th:value="${role.id}" />
+                <div th:if="${#fields.hasErrors('roles')}"
+                     th:errors="*{roles}" style="color:red"> </div>
             </label>
 
             <span th:text="${role.name}"></span>
         </div>
     </div>
+
 
     <br>
     <div class="form">
@@ -71,7 +74,10 @@
     <br>
     <div class="form">
         <label>Password:</label>
-        <input type="password" th:field="*{password}" required size="25"/>
+        <input type="password"
+               th:field="*{password}"
+               placeholder="Leave empty to keep current password"
+               required size="25"/>
         <div th:if="${#fields.hasErrors('password')}"
              th:errors="*{password}" style="color:red"></div>
     </div>

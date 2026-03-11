@@ -62,13 +62,17 @@ public class AdminController {
     @GetMapping("/edit/{id}")
     public String editUser(Model model, @PathVariable Long id) {
         model.addAttribute("user", userService.findById(id));
-
+        model.addAttribute("roles", roleService.findAll());
         return "editUser";
     }
 
     @PostMapping("/edit")
     public String updateUser(@Valid @ModelAttribute("user") AppUser user, BindingResult  bindingResult, Model model) {
         AppUser existingUser = userService.findById(user.getId()).orElseThrow();
+
+        if (existingUser.getRoles() == null || existingUser.getRoles().isEmpty()) {
+            bindingResult.rejectValue("roles", "error.roles", "User must have at least one role");
+        }
 
         if (!existingUser.getUsername().equals(user.getUsername())
                 && userService.findByUsername(user.getUsername())) {
@@ -83,9 +87,10 @@ public class AdminController {
         }
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("roles", roleService.findAll());
             return "editUser";
         }
-        userService.save(user);
+        userService.update(user);
         return "redirect:/admin";
     }
 }

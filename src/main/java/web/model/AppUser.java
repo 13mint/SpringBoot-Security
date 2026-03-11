@@ -52,6 +52,7 @@ public class AppUser implements UserDetails {
 
     private String password;
 
+    @NotEmpty(message = "User must have at least one role")
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",

@@ -29,9 +29,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(AppUser user) {
         Role roleUser = roleRepository.findByName("ROLE_USER").orElseThrow();
-        if (!user.getPassword().startsWith("$2a$")) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-        }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         if (user.getRoles() == null || user.getRoles().isEmpty()) {
             user.setRoles(Set.of(roleUser));
@@ -45,6 +43,29 @@ public class UserServiceImpl implements UserService {
         }
 
         repo.save(user);
+    }
+
+    @Transactional
+    @Override
+    public void update(AppUser updatedUser) {
+
+        AppUser user = repo.findById(updatedUser.getId())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (updatedUser.getRoles() == null || updatedUser.getRoles().isEmpty()) {
+            throw new RuntimeException("User must have at least one role");
+        }
+
+        user.setUsername(updatedUser.getUsername());
+        user.setFirstName(updatedUser.getFirstName());
+        user.setLastName(updatedUser.getLastName());
+        user.setEmail(updatedUser.getEmail());
+        user.setAge(updatedUser.getAge());
+        user.setRoles(updatedUser.getRoles());
+
+        if (updatedUser.getPassword() != null && !updatedUser.getPassword().isBlank()) {
+            user.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+        }
     }
 
     @Override
