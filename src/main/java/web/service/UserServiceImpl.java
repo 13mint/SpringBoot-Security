@@ -29,7 +29,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(AppUser user) {
         Role roleUser = roleRepository.findByName("ROLE_USER").orElseThrow();
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         if (user.getRoles() == null || user.getRoles().isEmpty()) {
             user.setRoles(Set.of(roleUser));
@@ -45,7 +44,7 @@ public class UserServiceImpl implements UserService {
         if (user.getPassword() == null || user.getPassword().isBlank()) {
             throw new RuntimeException("Password is required");
         }
-
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         repo.save(user);
     }
 
