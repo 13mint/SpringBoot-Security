@@ -10,6 +10,8 @@ import web.repository.RoleRepository;
 import web.service.RoleService;
 import web.service.UserService;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -72,6 +74,7 @@ public class AdminController {
     @PostMapping("/edit")
     public String updateUser(@Valid @ModelAttribute("user") AppUser user, BindingResult  bindingResult, Model model) {
         AppUser existingUser = userService.findById(user.getId()).orElseThrow();
+        user.setId(existingUser.getId());
 
         if (user.getRoles() == null || user.getRoles().isEmpty()) {
             bindingResult.rejectValue("roles", "error.roles", "User must have at least one role");
@@ -90,8 +93,10 @@ public class AdminController {
         }
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("users", userService.findAll());
             model.addAttribute("roles", roleService.findAll());
-            return "redirect:/admin";
+            model.addAttribute("editError", true);
+            return "admin";
         }
         userService.update(user);
         return "redirect:/admin";

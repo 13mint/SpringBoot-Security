@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="">
+<html xmlns:th="http://www.thymeleaf.org" th:inline="javascript" lang="">
 
 <head>
     <meta charset="UTF-8">
@@ -321,8 +321,7 @@
 
                             </div>
 
-                            <form th:action="@{/admin/edit}"
-                                  method="post">
+                            <form th:action="@{/admin/edit}" th:object="${user}" method="post">
 
                                 <div class="modal-body">
 
@@ -330,17 +329,16 @@
                                         <label class="form-label">ID</label>
 
                                         <input class="form-control"
-                                               id="editIdDisplay"
                                                disabled>
                                     </div>
-                                    <input type="hidden" id="editId" name="id">
+                                    <input type="hidden" th:field="*{id}">
 
                                     <div class="mb-3">
                                         <label class="form-label">Roles</label>
                                         <div th:each="role : ${roles}" class="form-check">
                                             <label>
                                                 <input class="form-check-input role-checkbox" type="checkbox"
-                                                       name="roles" th:value="${role.id}">
+                                                       th:field="*{roles}" th:value="${role.id}">
                                             </label>
                                             <label class="form-check-label" th:text="${role.name}">
                                             </label>
@@ -354,8 +352,12 @@
                                         </label>
 
                                         <label for="editUsername">
-                                            <input class="form-control" id="editUsername" name="username">
+                                            <input class="form-control" id="editUsername" th:field="*{username}">
                                         </label>
+                                        <div class="text-danger"
+                                             th:if="${#fields.hasErrors('username')}"
+                                             th:errors="*{username}">
+                                        </div>
 
                                     </div>
 
@@ -366,8 +368,12 @@
                                         </label>
 
                                         <label for="editFirstName">
-                                            <input class="form-control" id="editFirstName" name="firstName">
+                                            <input class="form-control" id="editFirstName" th:field="*{firstName}">
                                         </label>
+                                        <div class="text-danger"
+                                             th:if="${#fields.hasErrors('firstName')}"
+                                             th:errors="*{firstName}">
+                                        </div>
 
                                     </div>
 
@@ -378,8 +384,12 @@
                                         </label>
 
                                         <label for="editLastName">
-                                            <input class="form-control" id="editLastName" name="lastName">
+                                            <input class="form-control" id="editLastName" th:field="*{lastName}">
                                         </label>
+                                        <div class="text-danger"
+                                             th:if="${#fields.hasErrors('lastName')}"
+                                             th:errors="*{lastName}">
+                                        </div>
 
                                     </div>
 
@@ -390,8 +400,12 @@
                                         </label>
 
                                         <label for="editAge">
-                                            <input type="number" class="form-control" id="editAge" name="age">
+                                            <input type="number" class="form-control" id="editAge" th:field="*{age}">
                                         </label>
+                                        <div class="text-danger"
+                                             th:if="${#fields.hasErrors('age')}"
+                                             th:errors="*{age}">
+                                        </div>
 
                                     </div>
 
@@ -402,9 +416,12 @@
                                         </label>
 
                                         <label for="editEmail">
-                                            <input class="form-control" id="editEmail" name="email">
+                                            <input class="form-control" id="editEmail" th:field="*{email}">
                                         </label>
-
+                                        <div class="text-danger"
+                                             th:if="${#fields.hasErrors('email')}"
+                                             th:errors="*{email}">
+                                        </div>
                                     </div>
 
                                     <div class="mb-3">
@@ -413,7 +430,7 @@
                                         <label>
                                             <input type="password"
                                                    class="form-control"
-                                                   name="password"
+                                                   th:field="*{password}"
                                                    placeholder="Leave empty if you don't want to change">
                                         </label>
                                         <div class="text-danger"
@@ -462,11 +479,6 @@
 <script>
     function fillEditModal(button) {
 
-        document.getElementById('editId').value =
-            button.getAttribute('data-id');
-        document.getElementById('editIdDisplay').value =
-            button.getAttribute('data-id');
-
         document.getElementById('editUsername').value =
             button.getAttribute('data-username');
 
@@ -508,8 +520,9 @@
             const modal = new bootstrap.Modal(document.getElementById('editModal'));
             modal.show();
         }
-
     });
 </script>
+
+
 </body>
 </html>
