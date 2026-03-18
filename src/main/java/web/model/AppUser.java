@@ -139,6 +139,14 @@ public class AppUser implements UserDetails {
     }
     public void setRoles(Set<Role> roles) { this.roles = roles;}
 
+    public String getRoleIds() {
+        if (roles == null) return "";
+
+        return roles.stream()
+                .map(role -> role.getId().toString())
+                .collect(java.util.stream.Collectors.joining(","));
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
