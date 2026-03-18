@@ -55,6 +55,10 @@ public class UserServiceImpl implements UserService {
         AppUser user = repo.findById(updatedUser.getId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
+        if (updatedUser.getId() == null) {
+            throw new RuntimeException("ID is null");
+        }
+
         if (updatedUser.getRoles() == null || updatedUser.getRoles().isEmpty()) {
             throw new RuntimeException("User must have at least one role");
         }
