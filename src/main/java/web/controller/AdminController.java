@@ -56,7 +56,7 @@ public class AdminController {
             model.addAttribute("roles", roleService.findAll());
             model.addAttribute("newUser", newUser);
             model.addAttribute("editUser", new AppUser());
-            return "redirect:/admin";
+            return "admin";
         }
 
         userService.save(newUser);
