@@ -19,7 +19,7 @@
             with roles:
 
             <span th:each="role : ${#authentication.authorities}"
-                  th:text="${role.authority} + ' '">
+                  th:text="${#strings.replace(role.authority, 'ROLE_', '')} + ' '">
             </span>
 
         </span>
